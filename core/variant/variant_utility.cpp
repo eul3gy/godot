@@ -1158,6 +1158,10 @@ String VariantUtilityFunctions::join_string(const Variant **p_args, int p_arg_co
 	return s;
 }
 
+double VariantUtilityFunctions::time() {
+	return OS::get_singleton()->get_ticks_msec() / 1000.0;
+}
+
 #ifdef DEBUG_ENABLED
 #define VCALLR *ret = p_func(VariantCasterAndValidate<P>::cast(p_args, Is, r_error)...)
 #define VCALL p_func(VariantCasterAndValidate<P>::cast(p_args, Is, r_error)...)
@@ -1779,6 +1783,8 @@ void Variant::_register_variant_utility_functions() {
 	FUNCBINDR(rid_from_int64, sarray("base"), Variant::UTILITY_FUNC_TYPE_GENERAL);
 
 	FUNCBINDR(is_same, sarray("a", "b"), Variant::UTILITY_FUNC_TYPE_GENERAL);
+
+	FUNCBINDR(time, sarray(), Variant::UTILITY_FUNC_TYPE_GENERAL);
 }
 
 void Variant::_unregister_variant_utility_functions() {
